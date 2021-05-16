@@ -8,6 +8,7 @@ import (
 
 type Data struct {
 	Input string `json:"input"`
+	Temp  string `json:"temp"`
 }
 
 func main() {
@@ -22,7 +23,8 @@ func main() {
 			return
 		}
 		input := parsedBody.Input
-		firstmap, followmap, table, b, yesset, noset := ll1.Analyse(input)
+		temp := parsedBody.Temp
+		firstmap, followmap, table, b, yesset, noset,ans := ll1.Analyse(input,temp)
 		if b {
 			c.JSON(200, gin.H{
 				"message": "不是ll(1)文法，有冲突",
@@ -31,6 +33,7 @@ func main() {
 				"table":   table,
 				"yesset":  yesset,
 				"noset":   noset,
+				"ans": ans,
 			})
 		} else {
 			c.JSON(200, gin.H{
@@ -40,6 +43,7 @@ func main() {
 				"table":   table,
 				"yesset":  yesset,
 				"noset":   noset,
+				"ans": ans,
 			})
 		}
 

@@ -1,6 +1,7 @@
 package ll1
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -333,7 +334,38 @@ func ExcTable(arr []string, noEndSet *Set, yesEndSet *Set, firstMap map[string][
 	return table, conflict
 }
 
-func Analyse(input string) (map[string][]string, map[string][]string, map[string]map[string]string, bool, []string, []string) {
+func Exc(input string, str string, yesEndSet *Set, table map[string]map[string]string) []string {
+	sta := string(input[0])
+	str = str + "$"
+	var ans []string
+	for len(sta) != 0 {
+		scan := string(str[0])
+		tAns := "栈为： " + sta + " 串为： " + str
+		if str[0] == sta[0] {
+			tAns = tAns + "通过" + "匹配" + "得到"
+			sta = sta[1:]
+			str = str[1:]
+			tAns = tAns + "  栈为： " + sta + " 串为： " + str
+			ans = append(ans, tAns)
+		} else if len(str) != 0 && (!yesEndSet.Get(string(str[0])) || table[string(sta[0])][string(str[0])] == "") {
+			ans = append(ans, "错误")
+			return ans
+		} else {
+			tAns = tAns + "通过" + table[string(sta[0])][scan] + "得到"
+			if table[string(sta[0])][scan][3:] != "#" {
+				sta = table[string(sta[0])][scan][3:] + sta[1:]
+			} else {
+				sta = sta[1:]
+			}
+			tAns = tAns + "  栈为： " + sta + " 串为： " + str
+			ans = append(ans, tAns)
+		}
+	}
+	return ans
+
+}
+
+func Analyse(input string, str string) (map[string][]string, map[string][]string, map[string]map[string]string, bool, []string, []string, []string) {
 	//input := "G->S S->Tfg T->(S)ST|a|#"
 	//input := "S->iEtST|a T->bS|# E->c"
 
@@ -341,5 +373,10 @@ func Analyse(input string) (map[string][]string, map[string][]string, map[string
 	firstMap, emptySET := ExuFirst(arr, noEndSet)
 	followMap := ExuFollow(arr, noEndSet, emptySET, firstMap)
 	table, conflict := ExcTable(arr, noEndSet, yesEndSet, firstMap, followMap)
-	return firstMap, followMap, table, conflict, yesEndSet.Traverse(), noEndSet.Traverse()
+	var ana []string
+	if str != "" {
+		fmt.Println(yesEndSet)
+		ana = Exc(input, str, yesEndSet, table)
+	}
+	return firstMap, followMap, table, conflict, yesEndSet.Traverse(), noEndSet.Traverse(), ana
 }

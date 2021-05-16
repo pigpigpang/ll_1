@@ -35,6 +35,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -114,21 +115,37 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1621170271891" />
-    <state width="1877" height="199" key="GridCell.Tab.0.bottom" timestamp="1621172919165">
+    <state width="1877" height="199" key="GridCell.Tab.0.bottom" timestamp="1621183912121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="199" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621172919165" />
-    <state width="1877" height="199" key="GridCell.Tab.0.center" timestamp="1621172919165">
+    <state width="1877" height="199" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621183912121" />
+    <state width="1877" height="199" key="GridCell.Tab.0.center" timestamp="1621183912121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="199" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621172919165" />
-    <state width="1877" height="199" key="GridCell.Tab.0.left" timestamp="1621172919165">
+    <state width="1877" height="199" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621183912121" />
+    <state width="1877" height="199" key="GridCell.Tab.0.left" timestamp="1621183912121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="199" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621172919165" />
-    <state width="1877" height="199" key="GridCell.Tab.0.right" timestamp="1621172919165">
+    <state width="1877" height="199" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621183912121" />
+    <state width="1877" height="199" key="GridCell.Tab.0.right" timestamp="1621183912121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="199" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621172919165" />
+    <state width="1877" height="199" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621183912121" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1621182173314">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621182173314" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1621182173314">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621182173314" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1621182173314">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621182173314" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1621182173314">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621182173314" />
   </component>
 </project>

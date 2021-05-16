@@ -23,15 +23,31 @@
       <input
         type="text"
         class="form-control"
-        placeholder="S->iEtST|a T->bS|# E->c"
+        placeholder="E->TY Y->+TY|# T->FZ Z->*FZ|# F->(E)|i"
         id="input"
         aria-describedby="basic-addon1"
       />
     </div>
     <span class="input-group-text" id="basic-addon1"
       >文法中的空集用#表示&emsp;请用空格代表不同的句子，除此之外，不要用空格
-      例子为： S->iEtST|a T->bS|# E->c
+      例子为： E->TY Y->+TY|# T->FZ Z->*FZ|# F->(E)|i
     </span>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"
+          >请输入待识别的式子 不需要识别请留空</span
+        >
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="i+i*i"
+        id="temp"
+        aria-describedby="basic-addon1"
+      />
+    </div>
+    <span class="input-group-text" id="basic-addon1">例子为 i+i*i </span>
 
     <button type="button" class="btn btn-default" onclick="a()">计算</button>
 
@@ -46,12 +62,16 @@
 
     <p id="p4">分析表为</p>
     <table id="table" border="1"></table>
+
+    <p id="p5">分析过程</p>
+    <p id="ana"></p>
     <script>
       function load() {
         document.getElementById("p1").style.visibility = "hidden";
         document.getElementById("p2").style.visibility = "hidden";
         document.getElementById("p3").style.visibility = "hidden";
         document.getElementById("p4").style.visibility = "hidden";
+        document.getElementById("p5").style.visibility = "hidden";
       }
 
       load();
@@ -61,6 +81,7 @@
         document.getElementById("p2").style.visibility = "visible";
         document.getElementById("p3").style.visibility = "visible";
         document.getElementById("p4").style.visibility = "visible";
+        document.getElementById("p5").style.visibility = "visible";
 
         var tb = document.getElementById("table");
         var rowNum = tb.rows.length;
@@ -77,6 +98,7 @@
           contentType: "application/json",
           data: JSON.stringify({
             input: document.getElementById("input").value,
+            temp: document.getElementById("temp").value,
           }),
           success: function (data) {
             var obj = typeof data == "string" ? JSON.parse(data) : data;
@@ -87,6 +109,11 @@
               "&emsp;" + JSON.stringify(obj.first);
             document.getElementById("follow").innerHTML =
               "&emsp;" + JSON.stringify(obj.follow);
+            tep = "";
+            for (v in obj.ans) {
+              tep = tep + obj.ans[v] + "<br>";
+            }
+            document.getElementById("ana").innerHTML = tep;
           },
           error: function (response) {},
         });
