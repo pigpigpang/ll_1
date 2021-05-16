@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+* {
+    /* 所有4个外边距都是0 */
+    margin: 0;
+    /* 所有4个内边距都是0 */
+    padding: 0;
+    /* 指定如果内容溢出一个元素的框,内容会被修剪,并且其余内容是不可见的 */
+    overflow: hidden;
+}
+
+body {
+    /* 没有文本装饰 */
+    text-decoration: none;
+    /* 居中 */
+    text-align: center;
+    /* 背景颜色 */
+    background: #23262E;
+}
+
+.login-main {
+    /* 块级元素居中显示 */
+    margin: 0 auto;
+}
+
+.layui-elip {
+    font-size: 30px;
+    color: #fff;
+    /* 没有文本装饰 */
+    text-decoration: none;
+    font-weight: bold;
+    /* 设置上外边距 */
+    margin-top: 200px;
+    /* 设置下外边距 */
+    margin-bottom: 30px;
+}
+
+.layui-form-item {
+    margin: 0 auto;
+    width: 300px;
+    text-align: center;
+}
+
+.line {
+    height: 60px;
+    width: 300px;
+    line-height: 60px;
+}

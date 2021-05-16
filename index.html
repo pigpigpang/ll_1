@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LL(1)文法分析</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css" />
+    <script src="./js/jquery-3.5.1/jquery-3.5.1.js"></script>
+    <script src="./js/bootstrap.js" charset="UTF-8"></script>
+    <style>
+      td {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">请输入文法</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="S->iEtST|a T->bS|# E->c"
+        id="input"
+        aria-describedby="basic-addon1"
+      />
+    </div>
+    <span class="input-group-text" id="basic-addon1"
+      >文法中的空集用#表示&emsp;请用空格代表不同的句子，除此之外，不要用空格
+      例子为： S->iEtST|a T->bS|# E->c
+    </span>
+
+    <button type="button" class="btn btn-default" onclick="a()">计算</button>
+
+    <p id="p1" style>ll分析的结果是</p>
+    <p id="bool"></p>
+
+    <p id="p2">first集为</p>
+    <p id="first"></p>
+
+    <p id="p3">follow集为</p>
+    <p id="follow"></p>
+
+    <p id="p4">分析表为</p>
+    <table id="table" border="1"></table>
+    <script>
+      function load() {
+        document.getElementById("p1").style.visibility = "hidden";
+        document.getElementById("p2").style.visibility = "hidden";
+        document.getElementById("p3").style.visibility = "hidden";
+        document.getElementById("p4").style.visibility = "hidden";
+      }
+
+      load();
+
+      function a() {
+        document.getElementById("p1").style.visibility = "visible";
+        document.getElementById("p2").style.visibility = "visible";
+        document.getElementById("p3").style.visibility = "visible";
+        document.getElementById("p4").style.visibility = "visible";
+
+        var tb = document.getElementById("table");
+        var rowNum = tb.rows.length;
+        for (i = 0; i < rowNum; i++) {
+          tb.deleteRow(i);
+          rowNum = rowNum - 1;
+          i = i - 1;
+        }
+
+        $.ajax({
+          url: "https://ll1.xiaoyj.cn/back/analyse",
+          type: "POST",
+          dataType: "json",
+          contentType: "application/json",
+          data: JSON.stringify({
+            input: document.getElementById("input").value,
+          }),
+          success: function (data) {
+            var obj = typeof data == "string" ? JSON.parse(data) : data;
+            result = obj;
+            handleTable(result);
+            document.getElementById("bool").innerHTML = "&emsp;" + obj.message;
+            document.getElementById("first").innerHTML =
+              "&emsp;" + JSON.stringify(obj.first);
+            document.getElementById("follow").innerHTML =
+              "&emsp;" + JSON.stringify(obj.follow);
+          },
+          error: function (response) {},
+        });
+      }
+      /**
+       * 生成表格
+       */
+      function handleTable(result) {
+        let all = document.createDocumentFragment();
+        for (let i = 0; i <= result.noset.length; i++) {
+          let row = document.createElement("tr");
+
+          let rowContainer = document.createDocumentFragment();
+
+          for (let j = 0; j <= result.yesset.length; j++) {
+            let col = document.createElement("td");
+            if (j == 0) {
+              if (result.noset[i - 1] != undefined) {
+                col.innerHTML = result.noset[i - 1];
+              }
+            }
+            rowContainer.appendChild(col);
+            if (i == 0) {
+              if (result.yesset[j - 1] != undefined) {
+                col.innerHTML = result.yesset[j - 1];
+              }
+            }
+          }
+
+          row.appendChild(rowContainer);
+          all.appendChild(row);
+        }
+        table.appendChild(all);
+        let trs = document.querySelectorAll("tr");
+
+        for (let i = 1; i < trs.length; i++) {
+          let tds = trs[i].querySelectorAll("td");
+
+          if (result.table[tds[0].innerHTML] != undefined) {
+            for (let j = 1; j < tds.length; j++) {
+              tds[j].innerHTML = result.table[tds[0].innerHTML][
+                trs[0].querySelectorAll("td")[j].innerHTML
+              ]
+                ? (tds[j].innerHTML =
+                    result.table[tds[0].innerHTML][
+                      trs[0].querySelectorAll("td")[j].innerHTML
+                    ])
+                : "";
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
